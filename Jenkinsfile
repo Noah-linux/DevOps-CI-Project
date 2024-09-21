@@ -2,7 +2,6 @@ pipeline {
     agent any
     
     tools{
-        jdk 'java'
         nodejs 'node16'
         
     }
