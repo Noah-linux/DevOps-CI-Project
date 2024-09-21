@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Noah-linux/DevOps-CI-Project.git'
+                git branch: 'test', url: 'https://github.com/Noah-linux/DevOps-CI-Project.git'
             }
         }
         
