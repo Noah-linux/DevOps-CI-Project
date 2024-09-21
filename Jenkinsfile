@@ -1,9 +1,7 @@
 pipeline {
     agent any
 
-    tool {
-        nodejs 'node16'
-    }
+   
     
     //environment{
         //SCANNER_HOME= tool 'sonar-scanner'
@@ -13,6 +11,28 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 git branch: 'test', url: 'https://github.com/Noah-linux/DevOps-CI-Project.git'
+            }
+        }
+
+     stage('Install Node.js and npm') {
+            steps {
+                script {
+                    // Check if Node.js is installed
+                    def nodeInstalled = sh(script: 'node -v', returnStatus: true) == 0
+                    if (!nodeInstalled) {
+                        // Install Node.js and npm (for Ubuntu/Debian)
+                        sh '''
+                        sudo apt update
+                        sudo apt install -y nodejs npm
+                        '''
+                    }
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'npm install'  // Install npm packages
+                sh 'npm run build'  // Example build command
             }
         }
         
