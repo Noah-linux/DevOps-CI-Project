@@ -3,6 +3,7 @@ pipeline {
     
     tools{
         nodejs 'node16'
+        dependencyCheck 'DC'
         
     }
     
