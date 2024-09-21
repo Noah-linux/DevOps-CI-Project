@@ -34,18 +34,12 @@ pipeline {
       //  }
         
         
-        // stage('Install Dependencies') {
-            //steps {
-                //sh "npm ci"
-           //}
-      //  }
+        stage('Install Dependencies') {
+            steps {
+                sh "npm install"
+           }
+        }
 
-      stage('Check Node and npm') {
-    steps {
-        sh 'node -v'
-        sh 'npm -v'
-    }
-}  
 
         
         stage('Backend') {
