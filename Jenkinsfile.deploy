@@ -30,8 +30,8 @@ pipeline {
      stage('Backend') {
             steps {
                 sh '''
-                    mkdir -p /app/backend
-                    cd /app/backend
+                    mkdir -p $WORKSPACE/app/backend
+                    cd $WORKSPACE/app/backend
                     npm install
                 '''
             }
@@ -40,8 +40,8 @@ pipeline {
         stage('Frontend') {
             steps {
                 sh '''
-                    mkdir -p app/frontend
-                    cd app/frontend
+                    mkdir -p $WORKSPACE/app/frontend
+                    cd $WORKSPACE/app/frontend
                     npm install
                 '''
             }
