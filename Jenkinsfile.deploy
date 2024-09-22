@@ -1,5 +1,9 @@
 pipeline {
     agent any
+
+    tools {
+        nodejs : 'node16'
+    }
  
     parameters {  
         string(name: 'AppPort', defaultValue: '9090', description: 'Port to run the application')
