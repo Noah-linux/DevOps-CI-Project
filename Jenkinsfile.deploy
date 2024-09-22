@@ -27,20 +27,23 @@ pipeline {
                 sh "trivy fs ."
             }
         }
-
      stage('Backend') {
             steps {
-                dir('/app/backend') {
-                    sh "npm install"
-                }
+                sh '''
+                    mkdir -p /app/backend
+                    cd /app/backend
+                    npm install
+                '''
             }
         }
         
-        stage('frontend') {
+        stage('Frontend') {
             steps {
-                dir('/root/.jenkins/workspace/Bank/app/frontend') {
-                    sh "npm install"
-                }
+                sh '''
+                    mkdir -p app/frontend
+                    cd app/frontend
+                    npm install
+                '''
             }
         }
         }
