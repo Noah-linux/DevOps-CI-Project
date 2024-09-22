@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs:'node22'
+   tools {
+        nodejs 'node22' // 'nodejs' should match the name you configured in Global Tool Configuration
     }
  
     parameters {  
