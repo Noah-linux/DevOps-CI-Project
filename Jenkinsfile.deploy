@@ -90,7 +90,7 @@ pipeline {
             steps {
                 dir('app') {
                     script {
-                        jf 'rt u target/app-jar/*' 
+                         jf 'rt u build/*' 
                     }
                 }
             }
@@ -99,15 +99,15 @@ pipeline {
     }
 
 
-   // post {
-       // always {
+   post {
+        always {
              //Clean up Docker containers after the pipeline finishes
-          // script {
-              // sh '''
-              //      cd $WORKSPACE/app
+          script {
+               sh '''
+                    cd $WORKSPACE/app
                     docker compose down
-              //  '''
-          //  }
-      //  }
-   // }
+              '''
+           }
+        }
+    }
 }
