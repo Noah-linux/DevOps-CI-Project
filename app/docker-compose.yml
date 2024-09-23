@@ -12,7 +12,7 @@ services:
       backend:
         condition: service_healthy
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:3001
+      - NEXT_PUBLIC_API_URL=http://localhost:9090
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:9090"]
       timeout: 10s
