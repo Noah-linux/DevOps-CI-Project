@@ -67,7 +67,7 @@ pipeline {
                     // Deploy the application using docker-compose
                     sh '''
                         cd $WORKSPACE/app
-                        docker-compose up -d
+                        docker compose up -d
                     '''
                 }
             }
