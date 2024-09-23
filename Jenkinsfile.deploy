@@ -76,7 +76,7 @@ pipeline {
 
     post {
         always {
-             Clean up Docker containers after the pipeline finishes
+             //Clean up Docker containers after the pipeline finishes
            script {
                sh '''
                     cd $WORKSPACE/app
