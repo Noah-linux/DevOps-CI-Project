@@ -19,7 +19,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git branch: 'test', url: "https://github.com/Noah-linux/DevOps-CI-Project.git"
+                git branch: 'main', url: "https://github.com/Noah-linux/DevOps-CI-Project.git"
             }
         }
 
