@@ -90,7 +90,7 @@ pipeline {
             steps {
                 dir('app') {
                     script {
-                        jf 'rt u target app-jar/'
+                        jf 'rt u target/app-jar/*' 
                     }
                 }
             }
