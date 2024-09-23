@@ -86,21 +86,15 @@ pipeline {
             }
         }
 
-stage('Push to JFrog Artifactory') {
-    steps {
-        script {
-            // Tag the Docker image
-            sh """
-                docker tag ${params.ImageName}:${env.BUILD_NUMBER} ${params.JFrogURL}/${params.RepositoryName}/${params.ImageName}:${env.BUILD_NUMBER}
-            """
-
-            // Push the Docker image to JFrog Artifactory
-            sh """
-                jfrog rt docker-push ${params.ImageName}:${env.BUILD_NUMBER} ${params.RepositoryName} --build-name= bank --build-number=${env.BUILD_NUMBER}
-            """
+ stage('Upload to Artifactory') {
+            steps {
+                dir('petclinic-app') {
+                    script {
+                        jf 'rt u target petclinic-jar/'
+                    }
+                }
+            }
         }
-    }
-}
 
 
     post {
