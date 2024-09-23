@@ -6,7 +6,7 @@ pipeline {
     }
 
     parameters {  
-        string(name: 'AppPort', defaultValue: '9090', description: 'Port to run the application')
+        string(name: 'AppPort', defaultValue: '3000', description: 'Port to run the application')
         string(name: 'JFrogURL', defaultValue: 'ncloud.jfrog.io', description: 'JFrog Artifactory URL')
         string(name: 'RepositoryName', defaultValue: 'bank', description: 'Repository name for Docker image') // Parameterize repository name
         string(name: 'ImageName', defaultValue: 'bank', description: 'Docker image name') // Parameterize image name
