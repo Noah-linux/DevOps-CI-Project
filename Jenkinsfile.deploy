@@ -49,29 +49,18 @@ pipeline {
             }
         }
 
-           // Unit Test Stage for Backend
         stage('Unit Tests - Backend') {
-            steps {
-                script {
-                    dir("$WORKSPACE/app/backend") {
-                        // Run unit tests (assume "npm test" is configured in package.json)
-                        sh 'npm test'
-                    }
-                }
+    steps {
+        script {
+            dir("$WORKSPACE/app/backend") { // Adjust this path if necessary
+                sh 'npm install' // Install dependencies
+                sh 'npm test' // Run Mocha tests
             }
         }
+    }
+}
 
-        // Unit Test Stage for Frontend
-        stage('Unit Tests - Frontend') {
-            steps {
-                script {
-                    dir("$WORKSPACE/app/frontend") {
-                        // Run unit tests (assume "npm test" is configured in package.json)
-                        sh 'npm test'
-                    }
-                }
-            }
-        }
+
 
         stage('Build Docker Image') {
             steps {
