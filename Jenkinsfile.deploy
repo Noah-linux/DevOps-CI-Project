@@ -55,7 +55,7 @@ pipeline {
                     // Build the Docker image
                     sh '''
                         cd $WORKSPACE/app
-                        docker-compose build
+                        docker compose build
                     '''
                 }
             }
