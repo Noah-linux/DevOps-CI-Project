@@ -88,9 +88,9 @@ pipeline {
 
  stage('Upload to Artifactory') {
             steps {
-                dir('petclinic-app') {
+                dir('app') {
                     script {
-                        jf 'rt u target petclinic-jar/'
+                        jf 'rt u target app-jar/'
                     }
                 }
             }
@@ -105,7 +105,7 @@ pipeline {
            script {
                sh '''
                     cd $WORKSPACE/app
-                    docker-compose down
+                    docker compose down
                 '''
             }
         }
