@@ -1,18 +1,20 @@
+version: '3.5'
+
 services:
   frontend:
     container_name: ng_frontend
     build: ./frontend
     ports:
-      - 9090:9090
+      - 3000:3000
     platform: linux/x86_64
     working_dir: /app-frontend
     depends_on:
       backend:
         condition: service_healthy
     environment:
-      - NEXT_PUBLIC_API_URL=http://backend:3001  # Use backend service name
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9090/health"]  # Replace with your health endpoint
+      test: ["CMD", "lsof", "-t", "-i:3000"]
       timeout: 10s
       retries: 5
 
@@ -34,10 +36,9 @@ services:
       - DB_HOST=db
       - DB_PORT=5432
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]  # Replace with your health endpoint
+      test: ["CMD", "lsof", "-t", "-i:3001"]
       timeout: 10s
       retries: 5
-
   db:
     container_name: ng_db
     image: postgres:15.1
@@ -49,6 +50,6 @@ services:
       - POSTGRES_PASSWORD=123456
     restart: 'always'
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d postgres"]  # Adjust as needed
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
       timeout: 10s
       retries: 5
