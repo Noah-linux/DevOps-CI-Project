@@ -49,6 +49,30 @@ pipeline {
             }
         }
 
+           // Unit Test Stage for Backend
+        stage('Unit Tests - Backend') {
+            steps {
+                script {
+                    dir("$WORKSPACE/app/backend") {
+                        // Run unit tests (assume "npm test" is configured in package.json)
+                        sh 'npm test'
+                    }
+                }
+            }
+        }
+
+        // Unit Test Stage for Frontend
+        stage('Unit Tests - Frontend') {
+            steps {
+                script {
+                    dir("$WORKSPACE/app/frontend") {
+                        // Run unit tests (assume "npm test" is configured in package.json)
+                        sh 'npm test'
+                    }
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -72,7 +96,27 @@ pipeline {
                 }
             }
         }
+
+         stage('Push to JFrog Artifactory') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'JFrogCredentials', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASS')]) {
+                        // Log into JFrog Artifactory Docker registry
+                        sh """
+                            jfrog rt docker-login ${params.JFrogURL} --user $JFROG_USER --password $JFROG_PASS
+                        """
+
+                        // Tag and push the Docker image
+                        sh """
+                            docker tag ${params.ImageName}:${env.BUILD_NUMBER} ${params.JFrogURL}/${params.RepositoryName}/${params.ImageName}:${env.BUILD_NUMBER}
+                            jfrog rt docker-push ${params.ImageName}:${env.BUILD_NUMBER} ${params.RepositoryName} --build-name=${JOB_NAME} --build-number=${env.BUILD_NUMBER}
+                        """
+                    }
+                }
+            }
+        }
     }
+
 
     post {
         always {
