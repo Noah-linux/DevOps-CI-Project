@@ -90,7 +90,7 @@ pipeline {
             steps {
                 dir('app') {
                     script {
-                         jf 'rt u build/*' 
+                         jf 'rt u dist/*' 
                     }
                 }
             }
