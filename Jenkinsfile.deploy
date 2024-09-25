@@ -86,19 +86,6 @@ pipeline {
             }
         }
 
- stage('Upload to Artifactory') {
-            steps {
-                dir('app') {
-                    script {
-                         jf 'rt u /*' 
-                    }
-                }
-            }
-        }
-
-    }
-
-
    post {
         always {
              //Clean up Docker containers after the pipeline finishes
